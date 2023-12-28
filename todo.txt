@@ -1,0 +1,56 @@
+last
+Urls =  {
+
+     "/login" = {
+            
+                request = {username: username, password: password},
+                response = {login token: token}      
+    
+        },
+
+    "/register" = {
+            
+                request = {username: username, password: password},
+                respond = {}
+    }
+
+    "/gamesearch" = { 
+            request = {token: token}
+            respond = {}
+
+        }
+       "/isgamefound" = request = {token: token}
+                            respond = {ok: ok}
+
+    /friendlist = {
+            request = {token: token}
+            respond {data: friendlist}
+
+    }
+    "/search" = {
+        request = { token : token}
+        respond = {data: personlist}
+    }
+
+    "/addfriend" = {
+        request = {token: token, friend: friend}
+    }
+
+    "/removefriend" = {
+        request = {token: token, friend: friend}
+    }
+
+    "/acceptfriend" = {
+        request = {token: token, friend: friend}
+    }
+
+    "/rejectfriend" = {
+        request = {token: token, friend: friend}
+    }
+
+    "/notifications" = {
+        request = {token: token}
+        respond = {data: notifications}
+    }
+
+}
