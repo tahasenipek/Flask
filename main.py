@@ -23,9 +23,27 @@ max_requests_per_minute = 70
 # --------------------------------------- # MODELS # ---------------------------------------------------- #
 
 matches = [
-    {'match_id': '1', 'username': 'user1', 'score': '12', 'win': 'true'},
+    {'match_id': '1', 'username': 'ahmet', 'score': '12', 'win': 'true'},
 	{'match_id': '2', 'username': 'user2', 'score': '12', 'win': 'true'},
-	{'match_id': '3', 'username': 'user3', 'score': '12', 'win': 'true'},
+	{'match_id': '3', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '4', 'username': 'user4', 'score': '12', 'win': 'true'},
+	{'match_id': '5', 'username': 'user5', 'score': '12', 'win': 'true'},
+	{'match_id': '6', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '7', 'username': 'user7', 'score': '12', 'win': 'true'},
+	{'match_id': '8', 'username': 'user8', 'score': '12', 'win': 'true'},
+	{'match_id': '9', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '10', 'username': 'user1', 'score': '12', 'win': 'true'},
+	{'match_id': '11', 'username': 'user1', 'score': '12', 'win': 'true'},
+	{'match_id': '12', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '13', 'username': 'user1', 'score': '12', 'win': 'true'},
+	{'match_id': '14', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '15', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '16', 'username': 'user16', 'score': '12', 'win': 'true'},
+	{'match_id': '17', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '18', 'username': 'user18', 'score': '12', 'win': 'true'},
+	{'match_id': '19', 'username': 'user19', 'score': '12', 'win': 'true'},
+	{'match_id': '20', 'username': 'ahmet', 'score': '12', 'win': 'true'},
+	{'match_id': '21', 'username': 'user21', 'score': '12', 'win': 'true'},
 ]
 
 
@@ -52,17 +70,18 @@ user_profile = [{
 	'password' : '123',
 	'language' : 'tr',
 	'matches' : matches,
+	'token' : '685578',
 },
 {
 	'username' : 'mehmet',
-	'picture' : 'https://picsum.photos/200/500',
 	'online_status' : False,
 	'friens' : friends,
 	'password' : '1234',
 	'language' : 'tr',
 	'tournament-nickname': 'null',
 	'matches' : matches,
-
+	'token' : '685579',
+	'picture' : 'https://picsum.photos/200/300',
 },
 ]
 
@@ -160,6 +179,7 @@ def login():
 		response_data = {
 			'success': True,
 			'access_token':  random.randint(100000, 999999),
+			'language': 'tr',
 		}
 
 		return jsonify(response_data), 201
@@ -280,32 +300,92 @@ def post_ping():
 
 
 
-@app.route('/update-profile', methods=['POST'])
+@app.route(endpointroot + '/update-profile', methods=['PUT'])
 def update_profile():
     try:
-        data = request.get_json()
-        user_id = data.get('id')
-        new_username = data.get('username')
-        new_password = data.get('password')
-        new_language = data.get('language')
+        data = request.json
 
-        for user in users:
-            if user['id'] == user_id:
-                user['username'] = new_username
-                user['password'] = new_password
-                user['language'] = new_language
+        # Kullanıcı adını güncelle
+        user_profile[0]['username'] = data.get('username', user_profile[0]['username'])
 
-                return jsonify({'success': True,})
+        # Şifreyi güncelle
+        user_profile[0]['password'] = data.get('password', user_profile[0]['password'])
 
-        return jsonify({'success': False, 'message': 'User not found'}), 404
+        # Dil bilgisini güncelle
+        user_profile[0]['language'] = data.get('language', user_profile[0]['language'])
+
+        # Başarılı bir şekilde güncelleme gerçekleştirildiyse
+        return jsonify({'success': True, 'language': user_profile[0]['language']})
+
     except Exception as e:
-        print(e)
-        return jsonify({'success': False, 'message': 'Error updating profile'}), 500
+        # Hata durumunda
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 
 
 
 
+@app.route(endpointroot + '/my-photo', methods=['POST'])
+def my_photo():
+	return jsonify({'photo': user_profile[1]['picture'], 'success': True })
 
+
+@app.route(endpointroot + '/update-photo', methods=['PUT'])
+def update_photo():
+	try:
+		user_profile[0]['picture'] = 'https://picsum.photos/200/300'
+		return jsonify({'success': True}), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+			
+
+@app.route(endpointroot + '/get-profile', methods=['POST'])
+def get_profile():
+	try:
+		data = request.get_json()
+		token = data['token']
+		
+
+		friends_count = len(user_profile[0]['friens'])
+		matches_count = len(user_profile[0]['matches'])
+		tournament = '12'
+
+		response_data = {
+			'success': True,
+			'username': user_profile[0]['username'],
+			'friends_count': friends_count,
+			'matches_count': matches_count,
+			'tournament': tournament,
+			'photo': user_profile[0]['picture'],
+			'online_status': user_profile[0]['online_status'],
+		}
+		return jsonify(response_data), 201
+
+	except:
+		return jsonify({'response': 'error'}), 500		
+
+
+@app.route(endpointroot + '/requestgame', methods=['POST'])
+def request_game():
+	try:
+		data = request.get_json()
+		print(data)
+		gameid = str(random.randint(1000, 9999))
+		print(gameid)
+		password = str(random.randint(1000, 9999))
+		print(password)
+		password_p1 = '1234'
+
+		response_data = {
+			'success': True,
+			'gameid': gameid,
+			'password': password,
+			"player": "p1",
+			'playerpass': password_p1,
+		}
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=2700)
