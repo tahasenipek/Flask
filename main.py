@@ -7,7 +7,7 @@ import random
 
 endpointroot = '/api'
 
-
+global_variable = 0
 
 app = Flask(__name__)
 CORS(app)
@@ -66,7 +66,7 @@ user_profile = [{
 	'username' : 'ahmet',
 	'picture' : 'https://picsum.photos/200/300',
 	'online_status' : True,
-	'friens' : friends,
+	'friends' : friends,
 	'password' : '123',
 	'language' : 'tr',
 	'matches' : matches,
@@ -75,7 +75,7 @@ user_profile = [{
 {
 	'username' : 'mehmet',
 	'online_status' : False,
-	'friens' : friends,
+	'friends' : friends,
 	'password' : '1234',
 	'language' : 'tr',
 	'tournament-nickname': 'null',
@@ -232,7 +232,6 @@ def search_users():
 	try:
 		data = request.get_json()
 		search_query = data['searchQuery']
-		print()
 		if search_query:
 			matching_users = [
                 {
@@ -252,11 +251,14 @@ def search_users():
 	except:
 		return jsonify({'response': 'error'}), 500
 
-
 	
 @app.route(endpointroot + "/putTheNick" , methods=['POST'])
 def putTheNick():
+	global global_variable
+
 	try:
+		
+		global_variable += 1
 		data = request.get_json()
 		nickname = data['nickname']
 		token = data['token']
@@ -266,6 +268,7 @@ def putTheNick():
 
 		response_data = {
 			'success': True,
+			'int': global_variable,
 		}
 
 		return jsonify(response_data), 201
@@ -273,9 +276,43 @@ def putTheNick():
 		return jsonify({'response': 'error'}), 500
 	
 	
+@app.route(endpointroot + "/startTournament" , methods=['POST'])
+def startTournament():
+	global global_variable
+	try:
+		print(global_variable)
+		if global_variable == 4:
+			print(global_variable)
+			data = request.get_json()
+			token = data['token']
 
+			print(data)
+			print(token)
+			print(global_variable)
+			if (token == '126795'):
+				print(global_variable)
+				print(token)
+				print(data)
+				response_data = {
+					'success': True,
+					'tournament': True,
+					'int': global_variable,
+					'token' : '126795',
+				}
+			return jsonify(response_data), 201
+		else:
+			print(global_variable),
+			response_data = {
+				'success': False,
+				'tournament': '0',
+				'int': global_variable,
+				'token' : '126795',
+			}
+			return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
 
-
+126795
 @app.route(endpointroot + "/ping" , methods=['GET'])
 def ping():
 	return jsonify({'response': 'pong!'})
@@ -291,6 +328,7 @@ def get_friends():
 		} 
 		for friend in friends
 	]
+
     return jsonify({'friends': friends_list, 'success': True} )
 
 @app.route(endpointroot+"/ping" , methods=['POST'])
@@ -346,12 +384,13 @@ def get_profile():
 		token = data['token']
 		
 
-		friends_count = len(user_profile[0]['friens'])
+		friends_count = len(user_profile[0]['friends'])
 		matches_count = len(user_profile[0]['matches'])
 		tournament = '12'
 
 		response_data = {
 			'success': True,
+			'friends' : False,
 			'username': user_profile[0]['username'],
 			'friends_count': friends_count,
 			'matches_count': matches_count,
