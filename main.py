@@ -187,6 +187,20 @@ def login():
 		return jsonify({'response': 'error'}), 500
 
 
+@app.route(endpointroot + "/logout", methods=['POST'])
+def logout():
+	
+	try:
+		data = request.get_json()
+
+		response_data = {
+			'success': True,
+		}
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
 @app.route(endpointroot + "/get-user-profile", methods=['GET'])
 def get_user_profile():
 
@@ -289,6 +303,8 @@ def startTournament():
 			print(data)
 			print(token)
 			print(global_variable)
+			tournament_id = '12334'
+
 			if (token == '126795'):
 				print(global_variable)
 				print(token)
@@ -298,6 +314,7 @@ def startTournament():
 					'tournament': True,
 					'int': global_variable,
 					'token' : '126795',
+					'tournament_id': tournament_id,
 				}
 			return jsonify(response_data), 201
 		else:
@@ -312,7 +329,19 @@ def startTournament():
 	except:
 		return jsonify({'response': 'error'}), 500
 
-126795
+
+
+@app.route(endpointroot + "/beingMatch" , methods=['POST'])
+def beingmatch():
+
+	try:
+		data = request.get_json()
+
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
 @app.route(endpointroot + "/ping" , methods=['GET'])
 def ping():
 	return jsonify({'response': 'pong!'})
@@ -376,6 +405,64 @@ def update_photo():
 	except:
 		return jsonify({'response': 'error'}), 500
 			
+
+@app.route(endpointroot + '/my-profile', methods=['POST'])
+def my_profile():
+	try:
+		data = request.get_json()
+		token = data['token']
+		
+
+		friends_count = len(user_profile[0]['friends'])
+		matches_count = len(user_profile[0]['matches'])
+		tournament = '12'
+
+		response_data = {
+			'success': True,
+			'username': user_profile[0]['username'],
+			'friends_count': friends_count,
+			'matches_count': matches_count,
+			'tournament': tournament,
+			'photo': user_profile[0]['picture'],
+			'online_status': user_profile[0]['online_status'],
+		}
+		return jsonify(response_data), 201
+
+	except:
+		return jsonify({'response': 'error'}), 500
+	
+@app.route(endpointroot + '/addfriend', methods=['POST'])
+def add_friend():
+	try:
+		data = request.get_json()
+		username = data['username']
+		token = data['token']
+		print(username)
+		print(token)
+
+		response_data = {
+			'success': True,
+		}
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
+
+@app.route(endpointroot + '/removefriend', methods=['POST'])
+def remove_friend():
+	try:
+		data = request.get_json()
+		username = data['username']
+		token = data['token']
+		print(username)
+		print(token)
+
+		response_data = {
+			'success': True,
+		}
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
 
 @app.route(endpointroot + '/get-profile', methods=['POST'])
 def get_profile():
