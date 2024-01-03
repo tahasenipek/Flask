@@ -179,7 +179,7 @@ def login():
 		response_data = {
 			'success': True,
 			'access_token':  random.randint(100000, 999999),
-			'language': 'tr',
+			'language': 'en',
 		}
 
 		return jsonify(response_data), 201
@@ -283,6 +283,7 @@ def putTheNick():
 		response_data = {
 			'success': True,
 			'int': global_variable,
+			'tournament_id': '12334',
 		}
 
 		return jsonify(response_data), 201
@@ -305,7 +306,7 @@ def startTournament():
 			print(global_variable)
 			tournament_id = '12334'
 
-			if (token == '126795'):
+			if (token == '260437'):
 				print(global_variable)
 				print(token)
 				print(data)
@@ -313,7 +314,7 @@ def startTournament():
 					'success': True,
 					'tournament': True,
 					'int': global_variable,
-					'token' : '126795',
+					'token' : '260437',
 					'tournament_id': tournament_id,
 				}
 			return jsonify(response_data), 201
@@ -323,7 +324,7 @@ def startTournament():
 				'success': False,
 				'tournament': '0',
 				'int': global_variable,
-				'token' : '126795',
+				'token' : '260437',
 			}
 			return jsonify(response_data), 201
 	except:
@@ -337,6 +338,12 @@ def beingmatch():
 	try:
 		data = request.get_json()
 
+		print(data)
+
+		response_data = {
+			'success': True,
+			'beingMatch': True,
+		}
 
 		return jsonify(response_data), 201
 	except:
