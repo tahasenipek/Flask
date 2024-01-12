@@ -187,6 +187,43 @@ def login():
 		return jsonify({'response': 'error'}), 500
 
 
+@app.route(endpointroot + "/joinTournament", methods=['POST'])
+def joinTournament():
+	
+	try:
+		data = request.get_json()
+		token = data['token']
+		tournament_id = data['tournament_id']
+
+		print(token)
+		print(tournament_id)
+
+		response_data = {
+			'success': True,
+			'tournament': True,
+		}
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+	
+@app.route(endpointroot + "/goToTournament", methods=['POST'])
+def goToTournament():
+
+	try:
+		data = request.get_json()
+		token = data['token']
+		print(token)
+
+		response_data = {
+			'success': True,
+			'tournament': True,
+		}
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
 @app.route(endpointroot + "/logout", methods=['POST'])
 def logout():
 	
@@ -240,6 +277,24 @@ def change_picture():
 
 
 
+@app.route(endpointroot + "/createTournament", methods=['POST'])
+def createTournament():
+	
+	try:
+		data = request.get_json()
+		token = data['token']
+		tournament_id = '12334'
+
+		response_data = {
+			'success': True,
+			'int' : '1',
+			'tournament_id': tournament_id,
+		}
+
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
 @app.route(endpointroot + "/search", methods=['POST'])
 def search_users():
 
@@ -268,24 +323,18 @@ def search_users():
 	
 @app.route(endpointroot + "/putTheNick" , methods=['POST'])
 def putTheNick():
-	global global_variable
 
 	try:
 		
-		global_variable += 1
 		data = request.get_json()
-		nickname = data['nickname']
 		token = data['token']
-
-		print(nickname)
+		username = data['username']  #arkadaşın ismini tournament sayfasına kaydet
 		print(token)
 
 		response_data = {
 			'success': True,
-			'int': global_variable,
 			'tournament_id': '12334',
 		}
-
 		return jsonify(response_data), 201
 	except:
 		return jsonify({'response': 'error'}), 500
@@ -454,6 +503,25 @@ def add_friend():
 	except:
 		return jsonify({'response': 'error'}), 500
 
+
+@app.route(endpointroot + '/tournamentTable', methods=['POST'])
+def tournament_table():
+	try:
+		data = request.get_json()
+		token = data['token']
+		print(token)
+
+		users = user_profile
+		print(users)
+
+		response_data = {
+			'success': True,
+			'tournamentTable': True,
+			'users': users,
+		}
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
 
 @app.route(endpointroot + '/removefriend', methods=['POST'])
 def remove_friend():
