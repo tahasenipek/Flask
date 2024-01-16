@@ -83,6 +83,18 @@ user_profile = [{
 	'token' : '685579',
 	'picture' : 'https://picsum.photos/200/300',
 },
+
+{
+	'username' : 'hasan',
+	'online_status' : False,
+	'friends' : friends,
+	'password' : '1234',
+	'language' : 'tr',
+	'tournament-nickname': 'null',
+	'matches' : matches,
+	'token' : '685579',
+	'picture' : 'https://picsum.photos/200/300',
+},
 ]
 
 
@@ -320,20 +332,42 @@ def search_users():
 	except:
 		return jsonify({'response': 'error'}), 500
 
+@app.route(endpointroot + "/tournament_table" , methods=['POST'])
+def tournament_table():
+	try:
+		data = request.get_json()
+		token = data['token']
+		print(token)
+
+		users = user_profile
+
+		response_data = {
+			'success': True,
+			'tournamentTable': True,
+			'users': users,
+			'users_length': '4',
+		}
+		
+		print("tournament_table")
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
 	
 @app.route(endpointroot + "/putTheNick" , methods=['POST'])
 def putTheNick():
-
+	global global_variable
 	try:
 		
 		data = request.get_json()
 		token = data['token']
 		username = data['username']  #arkadaşın ismini tournament sayfasına kaydet
 		print(token)
-
+		global_variable += 1
+		print(global_variable)
 		response_data = {
 			'success': True,
 			'tournament_id': '12334',
+			'user_count': global_variable,
 		}
 		return jsonify(response_data), 201
 	except:
@@ -503,25 +537,6 @@ def add_friend():
 	except:
 		return jsonify({'response': 'error'}), 500
 
-
-@app.route(endpointroot + '/tournamentTable', methods=['POST'])
-def tournament_table():
-	try:
-		data = request.get_json()
-		token = data['token']
-		print(token)
-
-		users = user_profile
-		print(users)
-
-		response_data = {
-			'success': True,
-			'tournamentTable': True,
-			'users': users,
-		}
-		return jsonify(response_data), 201
-	except:
-		return jsonify({'response': 'error'}), 500
 
 @app.route(endpointroot + '/removefriend', methods=['POST'])
 def remove_friend():
