@@ -554,6 +554,23 @@ def remove_friend():
 	except:
 		return jsonify({'response': 'error'}), 500
 
+@app.route(endpointroot + '/newgame', methods=['POST'])
+def	newgame():
+	try:
+		data = request.get_json()
+		token = data['token']
+		
+		
+
+		response_data = {
+			'success': True,
+			'newgame': True,
+		}
+		return jsonify(response_data), 201
+	except:
+		return jsonify({'response': 'error'}), 500
+
+
 @app.route(endpointroot + '/get-profile', methods=['POST'])
 def get_profile():
 	try:
