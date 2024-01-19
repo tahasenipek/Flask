@@ -22,30 +22,83 @@ max_requests_per_minute = 70
 
 # --------------------------------------- # MODELS # ---------------------------------------------------- #
 
-matches = [
-    {'match_id': '1', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '2', 'username': 'user2', 'score': '12', 'win': 'true'},
-	{'match_id': '3', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '4', 'username': 'user4', 'score': '12', 'win': 'true'},
-	{'match_id': '5', 'username': 'user5', 'score': '12', 'win': 'true'},
-	{'match_id': '6', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '7', 'username': 'user7', 'score': '12', 'win': 'true'},
-	{'match_id': '8', 'username': 'user8', 'score': '12', 'win': 'true'},
-	{'match_id': '9', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '10', 'username': 'user1', 'score': '12', 'win': 'true'},
-	{'match_id': '11', 'username': 'user1', 'score': '12', 'win': 'true'},
-	{'match_id': '12', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '13', 'username': 'user1', 'score': '12', 'win': 'true'},
-	{'match_id': '14', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '15', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '16', 'username': 'user16', 'score': '12', 'win': 'true'},
-	{'match_id': '17', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '18', 'username': 'user18', 'score': '12', 'win': 'true'},
-	{'match_id': '19', 'username': 'user19', 'score': '12', 'win': 'true'},
-	{'match_id': '20', 'username': 'ahmet', 'score': '12', 'win': 'true'},
-	{'match_id': '21', 'username': 'user21', 'score': '12', 'win': 'true'},
+their_matches_other_game = [
+	{'date' : '10.05.2024',
+		'oponent' : 'buggs',
+		'winlose' : 'L',},
+	{'date' : '11.05.2024',
+		'oppnent' : 'daffy',
+		'winlose' : 'W',},
+	{'date' : '12.05.2024',
+  		'oponent' : 'tweety',
+		'winlose' : 'L',},
+	{'date' : '13.05.2024',
+		'oponent' : 'porky',
+		'winlose' : 'W',},
+	{'date' : '14.05.2024',
+		'oponent' : 'marvin',
+		'winlose' : 'L',},
 ]
 
+their_matches = [
+	{'date' : '10.05.2024',
+		'oponent' : 'harribo',
+		'score1' : '3-5',
+		'winlose' : 'L',},
+	{'date' : '11.05.2024',
+		'oponent' : 'doritos',
+		'score1' : '5-3',
+		'winlose' : 'W',},
+	{'date' : '12.05.2024',
+		'oponent' : 'cheetos',
+		'score1' : '4-1',
+		'winlose' : 'L',},
+	{'date' : '13.05.2024',
+		'oponent' : 'dominos',
+		'score1' : '4-3',
+		'winlose' : 'W',},
+	{'date' : '14.05.2024',
+		'oponent' : 'maydonos',
+		'score1' : '3-2',
+		'winlose' : 'L',},
+]
+
+other_game_matches = [
+	{'date' : '01.01.2024',
+		'oponent' : 'yazituraci',
+		'winlose' : 'W',},
+	{'date' : '02.01.2024',
+		'oponent' : 'serdarortac',
+		'winlose' : 'L',},
+	{'date' : '03.01.2024',
+		'oponent' : 'kumarbaz',
+		'winlose' : 'W',},
+	{'date' : '04.01.2024',
+		'oponent' : 'muhasebeci',
+		'winlose' : 'L',},
+	{'date' : '05.01.2024',
+		'oponent' : 'maliyeci',
+		'winlose' : 'W',},
+]
+
+matches = [
+    {'date' : '12.12.2020',
+		'oponent' : 'sullivan',
+		'score1' : '12-4',
+		'winlose' : 'W',},
+	{'date' : '12.12.2020',
+		'oponent' : 'sullivan',
+		'score1' : '1-2',
+		'win-lose' : 'W',},
+	{'date' : '12.12.2020',
+		'oponent' : 'sullivan',
+		'score1' : '4-2',
+		'win-lose' : 'W',},
+	{'date' : '12.12.2020',
+		'oponent' : 'sullivan',
+		'score1' : '3-1',
+		'win-lose' : 'W',},
+]
 
 friends = [
 	{'id': '1', 'username': 'ahmet' , 'online_status': True},
@@ -70,6 +123,7 @@ user_profile = [{
 	'password' : '123',
 	'language' : 'tr',
 	'matches' : matches,
+	'other_game_matches' : other_game_matches,
 	'token' : '685578',
 },
 {
@@ -80,6 +134,7 @@ user_profile = [{
 	'language' : 'tr',
 	'tournament-nickname': 'null',
 	'matches' : matches,
+	'other_game_matches' : other_game_matches,
 	'token' : '685579',
 	'picture' : 'https://picsum.photos/200/300',
 },
@@ -92,6 +147,7 @@ user_profile = [{
 	'language' : 'tr',
 	'tournament-nickname': 'null',
 	'matches' : matches,
+	'other_game_matches' : other_game_matches,
 	'token' : '685579',
 	'picture' : 'https://picsum.photos/200/300',
 },
@@ -507,6 +563,12 @@ def my_profile():
 		matches_count = len(user_profile[0]['matches'])
 		tournament = '12'
 
+		match_length = '1'
+		other_match_len = '1'
+
+		matches = user_profile[0]['matches']
+		other_match = user_profile[0]['other_game_matches']
+
 		response_data = {
 			'success': True,
 			'username': user_profile[0]['username'],
@@ -515,6 +577,10 @@ def my_profile():
 			'tournament': tournament,
 			'photo': user_profile[0]['picture'],
 			'online_status': user_profile[0]['online_status'],
+			'match_length' : match_length,
+			'matches' : matches,
+			'other_game_len' : other_match_len,
+			'other_game_matches' : other_match,
 		}
 		return jsonify(response_data), 201
 
@@ -581,6 +647,13 @@ def get_profile():
 		friends_count = len(user_profile[0]['friends'])
 		matches_count = len(user_profile[0]['matches'])
 		tournament = '12'
+		match_data = {
+			'date' : '12.12.2020',
+			'oponent' : 'bana-karsi',
+			'score1' : '12',
+			'score2' : '3',
+			'win' : 'true',
+		}
 
 		response_data = {
 			'success': True,
@@ -591,6 +664,7 @@ def get_profile():
 			'tournament': tournament,
 			'photo': user_profile[0]['picture'],
 			'online_status': user_profile[0]['online_status'],
+			'match_data' : match_data,
 		}
 		return jsonify(response_data), 201
 
@@ -622,3 +696,4 @@ def request_game():
 		return jsonify({'response': 'error'}), 500
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=2700)
+
