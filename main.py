@@ -673,15 +673,6 @@ def get_profile():
 
 
 
-@app.route(endpointroot + '/1v1', methods=['POST'])
-{
-
-	
-
-
-}
-
-
 @app.route(endpointroot + '/requestgame', methods=['POST'])
 def request_game():
 	try:
