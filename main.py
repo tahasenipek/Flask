@@ -672,6 +672,16 @@ def get_profile():
 		return jsonify({'response': 'error'}), 500		
 
 
+
+@app.route(endpointroot + '/1v1', methods=['POST'])
+{
+
+	
+
+
+}
+
+
 @app.route(endpointroot + '/requestgame', methods=['POST'])
 def request_game():
 	try:
